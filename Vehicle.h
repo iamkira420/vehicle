@@ -6,31 +6,31 @@
 
 #ifndef VEHICLE_H
 #define VEHICLE_H
-
-#include <iostream>
 #include <string>
+#include <iostream>
+#include <stdio.h>
 using namespace std;
 
 class Vehicle {
     private:
-        string model;
+        std::string model;
         int year;
 
 public:
     // Constructors
     Vehicle();
-    Vehicle(string model, int year);
+    Vehicle(std::string model, int year);
     Vehicle(const Vehicle& v);
 
     // Setters
-    void setModel(string model);
+    void setModel(std::string model);
     void setYear(int year);
-    void setVehicle(string model, int year);
+    void setVehicle(std::string model, int year);
 
     // Getters
-    string getModel() const;
+    std::string getModel() const;
     int getYear() const;
-    Vehicle getVehicle() const;
+    virtual std::string getVehicleInfo() const;
 };
 
 #endif // VEHICLE_H

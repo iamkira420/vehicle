@@ -4,6 +4,8 @@
 #include "Vehicle.h"
 #include <string>
 #include <iostream>
+#include <stdio.h>
+using namespace std;
 
 class PassengerVehicle : public Vehicle {
     private:
@@ -15,7 +17,7 @@ class PassengerVehicle : public Vehicle {
 
         void setPassengerCapacity(int passengerCapacity);
         int getPassengerCapacity() const;
-        PassengerVehicle getPassengerVehicle() const;
+        std::string getVehicleInfo() const override;
 };
 
 #endif // PASSENGER_VEHICLE_H

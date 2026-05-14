@@ -1,10 +1,14 @@
-class PassengerVehicle : public Vehicle {
+/*class PassengerVehicle : public Vehicle {
     private:
         int passengerCapacity = 16; // default value is 16 - I'm assuming a Quantum as it is the most available passenger vehicle here in Mzansi
-}
+}*/
 
 #include "Vehicle.h"
 #include "PassengerVehicle.h"
+#include <string>
+#include <iostream>
+#include <stdio.h>
+using namespace std;
 
 // Constructors
 PassengerVehicle::PassengerVehicle() : Vehicle(), passengerCapacity(16) { }
@@ -28,7 +32,7 @@ int PassengerVehicle::getPassengerCapacity() const {
     return passengerCapacity;
 }
 
-PassengerVehicle PassengerVehicle::getPassengerVehicle() const {
-    return getVehicle() + " with passenger capacity of " + to_string(passengerCapacity);
+string PassengerVehicle::getVehicleInfo() const {
+    return Vehicle::getVehicleInfo() + " carrying " + to_string(passengerCapacity) + " passengers.";
 }
 

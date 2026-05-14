@@ -3,7 +3,11 @@
  * @date 12 May 2026
  */
 
-#include <Vehicle.h>
+#include "Vehicle.h"
+#include <string>
+#include <iostream>
+#include <stdio.h>
+using namespace std;
 
 // Constructors
 Vehicle::Vehicle() : model("Unknown"), year(1886) { } 
@@ -41,7 +45,6 @@ string Vehicle::getModel() const {
 int Vehicle::getYear() const {
     return year;
 }
-Vehicle Vehicle::getVehicle() const {
+string Vehicle::getVehicleInfo() const {
     return getModel() + " (" + to_string(getYear()) + ")";
 }
-
