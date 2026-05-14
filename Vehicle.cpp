@@ -6,7 +6,7 @@
 #include <Vehicle.h>
 
 // Constructors
-Vehicle::Vehicle() : model(""), year(1886) { } 
+Vehicle::Vehicle() : model("Unknown"), year(1886) { } 
 
 Vehicle::Vehicle(string model, int year) {
     setVehicle(model, year);
