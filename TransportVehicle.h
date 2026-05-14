@@ -1,23 +1,27 @@
-#ifndef TRANSPORT_VEHICLE_H
-#define TRANSPORT_VEHICLE_H
+#ifndef TRANSPORTVEHICLE_H
+#define TRANSPORTVEHICLE_H
 
 #include "Vehicle.h"
-#include <string>
+#include <QString>
+#include <QDebug>
 #include <iostream>
 #include <stdio.h>
 using namespace std;
 
 class TransportVehicle : public Vehicle {
+    Q_OBJECT
+
+    Q_PROPERTY(double capacityKg READ getCapacityKg WRITE setCapacityKg)
     private:
-        double capacityKg = 250; // default value is 250 kg
+        double capacityKg = 25000; // default value is 25000 kg
 
     public:
-        TransportVehicle();
-        TransportVehicle(std::string model, int year, double capacityKg);
+        explicit TransportVehicle(QObject *parent = nullptr);
+        TransportVehicle(QString model, int year, double capacityKg, QObject *parent = nullptr);
 
         void setCapacityKg(double capacityKg);
         double getCapacityKg() const;
-        std::string getVehicleInfo() const override;
+        QString getVehicleInfo() const override;
 };
 
-#endif // TRANSPORT_VEHICLE_H
+#endif // TRANSPORTVEHICLE_H

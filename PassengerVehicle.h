@@ -1,23 +1,27 @@
-#ifndef PASSENGER_VEHICLE_H
-#define PASSENGER_VEHICLE_H
+#ifndef PASSENGERVEHICLE_H
+#define PASSENGERVEHICLE_H
 
 #include "Vehicle.h"
-#include <string>
+#include <QString>
 #include <iostream>
-#include <stdio.h>
+#include <QDebug>
 using namespace std;
 
 class PassengerVehicle : public Vehicle {
+    Q_OBJECT
+
+    Q_PROPERTY(int passengerCapacity READ getPassengerCapacity WRITE setPassengerCapacity)
+
     private:
         int passengerCapacity;
 
     public:
-        PassengerVehicle();
-        PassengerVehicle(std::string model, int year, int passengerCapacity);
+        explicit PassengerVehicle(QObject *parent = nullptr);
+        PassengerVehicle(QString model, int year, int passengerCapacity, QObject *parent = nullptr);
 
         void setPassengerCapacity(int passengerCapacity);
         int getPassengerCapacity() const;
-        std::string getVehicleInfo() const override;
+        QString getVehicleInfo() const override;
 };
 
-#endif // PASSENGER_VEHICLE_H
+#endif // PASSENGERVEHICLE_H

@@ -1,19 +1,16 @@
-/*class TransportVehicle : public Vehicle {
-    private:
-        double capacityKg = 25000; // default value is 25000 kg
-}*/
+
 
 #include "Vehicle.h"
 #include "TransportVehicle.h"
-#include <string>
+#include <QString>
 #include <iostream>
-#include <stdio.h>
+#include <QDebug>
 using namespace std;
 
 // Constructors
-TransportVehicle::TransportVehicle() : Vehicle(), capacityKg(25000) { }
+TransportVehicle::TransportVehicle(QObject *parent) : Vehicle(parent), capacityKg(25000) { }
 
-TransportVehicle::TransportVehicle(string model, int year, double capacityKg) : Vehicle(model, year) {
+TransportVehicle::TransportVehicle(QString model, int year, double capacityKg, QObject *parent) : Vehicle(model, year, parent) {
     setCapacityKg(capacityKg);
 }
 
@@ -23,7 +20,7 @@ void TransportVehicle::setCapacityKg(double capacityKg) {
         this->capacityKg = capacityKg;
     } else {
         this->capacityKg = 25000; // Default capacity if invalid
-        cout << "Invalid capacity. Setting to default value of 25000." << endl;
+        qWarning() << "Invalid capacity. Setting to default value of 25000.";
     }
 }
 
@@ -32,7 +29,7 @@ double TransportVehicle::getCapacityKg() const {
     return capacityKg;
 }
 
-string TransportVehicle::getVehicleInfo() const {
-    return Vehicle::getVehicleInfo() + " with capacity of " + to_string(capacityKg) + " kg";
+QString TransportVehicle::getVehicleInfo() const {
+    return Vehicle::getVehicleInfo() + " with capacity of " + QString::number(capacityKg) + " kg";
 }
 

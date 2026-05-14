@@ -6,31 +6,39 @@
 
 #ifndef VEHICLE_H
 #define VEHICLE_H
-#include <string>
-#include <iostream>
-#include <stdio.h>
+#include <QObject>
+#include <QString>
+
 using namespace std;
 
-class Vehicle {
+class Vehicle : public QObject {
+    Q_OBJECT
+
+    Q_PROPERTY(QString model READ getModel WRITE setModel)
+    Q_PROPERTY(int year READ getYear WRITE setYear)
+
     private:
-        std::string model;
+        QString model;
         int year;
 
-public:
-    // Constructors
-    Vehicle();
-    Vehicle(std::string model, int year);
-    Vehicle(const Vehicle& v);
+    public:
+        // Constructors
+        explicit Vehicle(QObject *parent = nullptr);
 
-    // Setters
-    void setModel(std::string model);
-    void setYear(int year);
-    void setVehicle(std::string model, int year);
+        Vehicle(QString model, int year, QObject *parent = nullptr);
+        Vehicle(const Vehicle& v);
 
-    // Getters
-    std::string getModel() const;
-    int getYear() const;
-    virtual std::string getVehicleInfo() const;
-};
+        // Setters
+        void setModel(QString model);
+        void setYear(int year);
+        void setVehicle(QString model, int year);
+
+        // Getters
+        QString getModel() const;
+        int getYear() const;
+
+        virtual QString getVehicleInfo() const;
+        virtual ~Vehicle() {} 
+    };
 
 #endif // VEHICLE_H

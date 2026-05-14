@@ -1,19 +1,16 @@
-/*class PassengerVehicle : public Vehicle {
-    private:
-        int passengerCapacity = 16; // default value is 16 - I'm assuming a Quantum as it is the most available passenger vehicle here in Mzansi
-}*/
+
 
 #include "Vehicle.h"
 #include "PassengerVehicle.h"
-#include <string>
+#include <QString>
 #include <iostream>
-#include <stdio.h>
+#include <QDebug>
 using namespace std;
 
 // Constructors
-PassengerVehicle::PassengerVehicle() : Vehicle(), passengerCapacity(16) { }
+PassengerVehicle::PassengerVehicle(QObject *parent) : Vehicle(parent), passengerCapacity(16) { }
 
-PassengerVehicle::PassengerVehicle(string model, int year, int passengerCapacity) : Vehicle(model, year) {
+PassengerVehicle::PassengerVehicle(QString model, int year, int passengerCapacity, QObject *parent) : Vehicle(model, year, parent) {
     setPassengerCapacity(passengerCapacity);
 }
 
@@ -23,7 +20,7 @@ void PassengerVehicle::setPassengerCapacity(int passengerCapacity) {
         this->passengerCapacity = passengerCapacity;
     } else {
         this->passengerCapacity = 16; // Default capacity if invalid
-        cout << "Invalid passenger capacity. Setting to default value of 16." << endl;
+        qWarning() << "Invalid passenger capacity. Setting to default value of 16.";
     }
 }
 
@@ -32,7 +29,7 @@ int PassengerVehicle::getPassengerCapacity() const {
     return passengerCapacity;
 }
 
-string PassengerVehicle::getVehicleInfo() const {
-    return Vehicle::getVehicleInfo() + " carrying " + to_string(passengerCapacity) + " passengers.";
+QString PassengerVehicle::getVehicleInfo() const {
+    return Vehicle::getVehicleInfo() + " carrying " + QString::number(passengerCapacity) + " passengers.";
 }
 
