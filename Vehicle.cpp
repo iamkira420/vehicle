@@ -25,7 +25,7 @@ void Vehicle::setModel(QString model) {
     this->model = model;
 }
 void Vehicle::setYear(int year) {
-    if (year >= 1886 && year > 2026) { // The first car was invented in 1886, we're in 2026
+    if (year >= 1886 && year <= 2026) { // The first car was invented in 1886, we're in 2026
         this->year = year;
     } else  {
         qWarning() << "Invalid year. Year must be 1886 or later.";
