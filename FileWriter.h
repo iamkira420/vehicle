@@ -1,7 +1,7 @@
 #ifndef FILEWRITER_h
 #define FILEWRITER_h
 
-#include <QObjects>
+#include <QObject>
 #include <QString>
 #include <QString>
 
@@ -13,6 +13,6 @@ class FileWriter {
     public:
         FileWriter(QObjectList list, QString filename);
         int write();
-}
+};
 
 #endif // FILEWRITER_h

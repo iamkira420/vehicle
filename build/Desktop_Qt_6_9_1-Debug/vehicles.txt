@@ -1,0 +1,20 @@
+Vehicle
+model: Toyota Corolla
+year: 1886
+
+Vehicle
+model: Unknown
+year: 1886
+
+PassengerVehicle
+passengerCapacity: 7
+
+PassengerVehicle
+passengerCapacity: 16
+
+TransportVehicle
+capacityKg: 12000
+
+TransportVehicle
+capacityKg: 18000
+
