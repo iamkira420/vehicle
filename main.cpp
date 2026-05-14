@@ -1,116 +1,56 @@
-#include <iostream>
-#include <vector>
+#include <QCoreApplication>
+#include <QDebug>
+#include <QObjectList>
 
 #include "Vehicle.h"
 #include "PassengerVehicle.h"
 #include "TransportVehicle.h"
+#include "FileWriter.h"
 
-using namespace std;
+int main(int argc, char *argv[]) {
 
-int main() {
+    QCoreApplication a(argc, argv);
 
-    cout << "========== VEHICLE TESTING ==========\n\n";
-
-    // ==============================
-    // VEHICLE TESTS
-    // ==============================
-
-    cout << "----- Testing Vehicle Class -----\n";
+    qDebug() << "========== VEHICLE TESTING ==========";
 
     Vehicle vehicle1("Toyota Corolla", 2020);
-    Vehicle vehicle2; // Default constructor
-
-    cout << vehicle1.getVehicleInfo() << endl;
-    cout << vehicle2.getVehicleInfo() << endl;
-
-    cout << "\nUpdating vehicle2 details...\n";
-
-    vehicle2.setModel("Honda Civic");
-    vehicle2.setYear(2018);
-
-    cout << vehicle2.getVehicleInfo() << endl;
-
-
-    // ==============================
-    // PASSENGER VEHICLE TESTS
-    // ==============================
-
-    cout << "\n----- Testing PassengerVehicle Class -----\n";
+    Vehicle vehicle2;
 
     PassengerVehicle passenger1("BMW X5", 2022, 7);
-    PassengerVehicle passenger2; // Default constructor
-
-    cout << passenger1.getVehicleInfo() << endl;
-    cout << passenger2.getVehicleInfo() << endl;
-
-    cout << "\nUpdating passenger2 details...\n";
-
-    passenger2.setModel("Toyota Quantum");
-    passenger2.setYear(2021);
-    passenger2.setPassengerCapacity(12);
-
-    cout << passenger2.getVehicleInfo() << endl;
-
-
-    // ==============================
-    // TRANSPORT VEHICLE TESTS
-    // ==============================
-
-    cout << "\n----- Testing TransportVehicle Class -----\n";
+    PassengerVehicle passenger2;
 
     TransportVehicle transport1("Isuzu Truck", 2019, 12000);
-    TransportVehicle transport2; // Default constructor
-
-    cout << transport1.getVehicleInfo() << endl;
-    cout << transport2.getVehicleInfo() << endl;
-
-    cout << "\nUpdating transport2 details...\n";
+    TransportVehicle transport2;
 
     transport2.setModel("Mercedes Actros");
     transport2.setYear(2023);
     transport2.setCapacityKg(18000);
 
-    cout << transport2.getVehicleInfo() << endl;
+    QObjectList vehicleList;
 
+    vehicleList.append(&vehicle1);
+    vehicleList.append(&vehicle2);
+    vehicleList.append(&passenger1);
+    vehicleList.append(&passenger2);
+    vehicleList.append(&transport1);
+    vehicleList.append(&transport2);
 
-    // ==============================
-    // POLYMORPHIC TESTING
-    // ==============================
+    qDebug() << "\nDisplaying all vehicles:\n";
 
-    cout << "\n----- Testing Vehicle List -----\n";
+    for(QObject *object : vehicleList) {
 
-    vector<Vehicle*> vehicleList;
+        Vehicle *vehicle = qobject_cast<Vehicle*>(object);
 
-    vehicleList.push_back(&vehicle1);
-    vehicleList.push_back(&vehicle2);
-    vehicleList.push_back(&passenger1);
-    vehicleList.push_back(&passenger2);
-    vehicleList.push_back(&transport1);
-    vehicleList.push_back(&transport2);
-
-    cout << "\nDisplaying all vehicles:\n\n";
-
-    for (Vehicle* vehicle : vehicleList) {
-        cout << vehicle->getVehicleInfo() << endl;
+        if(vehicle) {
+            qDebug() << vehicle->getVehicleInfo();
+        }
     }
 
+    FileWriter writer(vehicleList, "vehicles.txt");
 
-    // ==============================
-    // GETTER TESTS
-    // ==============================
+    int recordsWritten = writer.write();
 
-    cout << "\n----- Testing Getters -----\n";
+    qDebug() << "\nRecords written to file:" << recordsWritten;
 
-    cout << "Model: " << passenger1.getModel() << endl;
-    cout << "Year: " << passenger1.getYear() << endl;
-    cout << "Passengers: " << passenger1.getPassengerCapacity() << endl;
-
-    cout << "\nCapacity of transport1: "
-         << transport1.getCapacityKg()
-         << " kg\n";
-
-
-    cout << "\n========== TESTING COMPLETE ==========\n";
-
-    return 0;
+    return a.exec();
 }
